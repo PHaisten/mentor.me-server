@@ -3,3 +3,4 @@ client/dist
 server/lib
 **/*/ENV_VAR
 ENV_VAR
+package.json
