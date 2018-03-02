@@ -2,10 +2,8 @@ import { Router } from "express";
 import topicRouter from "./topics";
 import authRouter from "./auth";
 import usersRouter from "./users";
-import mentorProfileRouter from "./mentorProfile";
-import mentorSkillsRouter from "./mentorSkills";
-import menteeProfile from './menteeProfile';
-import menteeTopics from './menteeTopics';
+import profileRouter from "./profile";
+import userSkillsRouter from './userSkills';
 import stripeDonationsRouter from "./stripeDonations";
 import { isLoggedIn, tokenMiddleware } from "../middleware/auth.mw";
 
@@ -21,10 +19,8 @@ router.use("/donate", stripeDonationsRouter);
 //   .delete(tokenMiddleware, isLoggedIn);
 
 router.use("/topics", topicRouter);
-router.use("/mentorprofile", mentorProfileRouter);
-router.use('/mentorskills', mentorSkillsRouter);
-router.use('/menteeprofile', menteeProfile);
-router.use('/menteetopics', menteeTopics);
+router.use('/profile', profileRouter);
+router.use('/userskills', userSkillsRouter);
 router.use("/users", usersRouter);
 
 export default router;
