@@ -43,7 +43,8 @@ router.get('/skill/:id', (req, res) => {
 });
 router.put('/:id', (req, res) => {
 	table
-		.updateMentorProfile(req.params.id, req.body.bio, req.body.location)
+    .updateMentorProfile(req.params.id, req.body.bio, req.body.location, 
+      req.body.hourly, req.body.rate, req.body.qualifications)
 		.then(results => {
 			res.json(results);
 		})

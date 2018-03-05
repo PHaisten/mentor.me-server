@@ -130,9 +130,13 @@ class Table {
         WHERE userid = ${id};`;
 		return executeQuery(sql);
 	}
-	updateMentorProfile(id, bio, location) {
+	updateMentorProfile(id, bio, location, hourly, rate, qualifications) {
 		let sql = `UPDATE mentors
-        SET bio= ${`"${bio}"`}, location = ${`"${location}"`}
+        SET bio= ${`"${bio}"`}, 
+        location = ${`"${location}"`}, 
+        hourly= ${hourly}, 
+        rate= ${rate}, 
+        qualifications= ${`"${qualifications}"`}
         WHERE userid = ${id};`;
 		return executeQuery(sql);
 	}
