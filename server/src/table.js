@@ -122,7 +122,46 @@ class Table {
         SET bio= ${`"${bio}"`}, location = ${`"${location}"`}
         WHERE userid = ${id};`
         return executeQuery(sql);
-    }
+    };
+    updateMentorProfile(id, bio, location){
+        let sql = 
+        `UPDATE mentors
+        SET bio= ${`"${bio}"`}, location = ${`"${location}"`}
+        WHERE userid = ${id};`
+        return executeQuery(sql);
+    };
+    createMentee(row) {
+        let columns = Object.keys(row);
+        let values = Object.values(row);
+        let placeholderString = generatePlaceholders(values);
+        let sql = 
+        `INSERT INTO ${this.tableName} (${columns.join(',')}) 
+        VALUES (${placeholderString});`;
+        return executeQuery(sql, values)
+        .then(results => {
+            let usersid = results.insertId;
+            let sql =
+            `INSERT INTO mentees(userid)
+            VALUE(${usersid});`
+            return executeQuery(sql, usersid)
+        })
+    };
+    createMentor(row) {
+        let columns = Object.keys(row);
+        let values = Object.values(row);
+        let placeholderString = generatePlaceholders(values);
+        let sql = 
+        `INSERT INTO ${this.tableName} (${columns.join(',')}) 
+        VALUES (${placeholderString});`;
+        return executeQuery(sql, values)
+        .then(results => {
+            let usersid = results.insertId;
+            let sql =
+            `INSERT INTO mentors(userid)
+            VALUE(${usersid});`
+            return executeQuery(sql, usersid)
+        })
+    };
 }
 
 export default Table;

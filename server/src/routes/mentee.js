@@ -34,5 +34,16 @@ router.get("/skill/:id", (req, res) => {  //request: mentee userid
         console.log(err);
         res.sendStatus(500);
       });
-  });  
+  });
+router.post('/create/', (req, res) => {  
+  table
+    .createMentee(req.body)   //(req.body.firstname/lastname/email/password)
+    .then(results => {       
+      res.json(results);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+}); 
 export default router;
