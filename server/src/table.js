@@ -91,6 +91,23 @@ class Table {
         WHERE t.id = ${id}`;
         return executeQuery(sql);
     }
+    getAllMentors() {
+        let sql =
+        `SELECT 
+        u.firstname as firstname, 
+        u.lastname as lastname,
+        u.email as email,
+        m.hourly as cost, 
+        m.location as location, 
+        m.bio as bio,
+        m.qualifications as qualifications,
+        m.rate as rate,
+        m.schedule as schedule,
+        m._created as memberSince
+        FROM ${this.tableName} m
+        JOIN  users u on u.id = m.userid`;
+		return executeQuery(sql);
+	}
 	getMentorProfile(id) {
 		let sql = `SELECT 
           u.firstname as firstname, 
@@ -99,7 +116,7 @@ class Table {
           m.hourly as cost, 
           m.location as location, 
           m.bio as bio,
-          m.qualifications as experience,
+          m.qualifications as qualifications,
           m.rate as rate,
           m.schedule as schedule,
           m._created as memberSince

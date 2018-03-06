@@ -6,7 +6,7 @@ let table = new Table('mentors');
 
 router.get('/', (req, res) => {
 	table
-		.getAll()
+		.getAllMentors()
 		.then(results => {
 			res.json(results);
 		})
