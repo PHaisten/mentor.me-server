@@ -60,20 +60,37 @@ class Table {
 		let sql = `DELETE FROM ${this.tableName} WHERE id = ${id}`;
 		return executeQuery(sql);
 	}
-	findTopics(id) {
+	findMentorByTopics(id) {
 		let sql = `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
+        u.email as contactinfo,
         m.hourly as cost, 
         m.location as location, 
+        m.qualifications as qualifications,
+        m.rate as rate,
         m.bio as bio 
-        FROM ${this.tableName} mt 
-        JOIN mentors m on  m.id = mt.mentorid 
+        FROM ${this.tableName} t 
+        JOIN mentortopics mt on mt.topicid = t.id
+        JOIN mentors m on m.id = mt.mentorid 
         JOIN users u on u.id = m.userid
-        JOIN topics t on t.id = mt.topicid
         WHERE t.id = ${id}`;
 		return executeQuery(sql);
-	}
+    }
+    findMenteeByTopics(id) {
+        let sql = `SELECT 
+        u.firstname as firstname, 
+        u.lastname as lastname,
+        u.email as contactinfo,
+        m.location as location, 
+        m.bio as bio 
+        FROM ${this.tableName} t 
+        JOIN menteetopics mt on mt.topicid = t.id
+        JOIN mentees m on m.id = mt.menteeid 
+        JOIN users u on u.id = m.userid
+        WHERE t.id = ${id}`;
+        return executeQuery(sql);
+    }
 	getMentorProfile(id) {
 		let sql = `SELECT 
           u.firstname as firstname, 
