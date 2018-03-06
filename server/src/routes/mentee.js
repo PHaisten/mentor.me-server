@@ -2,7 +2,7 @@ import { Router } from "express";
 import Table from "../table";
 
 let router = Router();
-let table = new Table("users");
+let table = new Table("mentees");
 
 router.get('/', (req, res) => {
 	table

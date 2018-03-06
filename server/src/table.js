@@ -156,8 +156,8 @@ class Table {
         m.location as location, 
         m.bio as bio,
         m._created as memberSince
-        FROM ${this.tableName} u
-        JOIN mentees m on u.id = m.userid
+        FROM ${this.tableName} m
+        JOIN users u on u.id = m.userid
         WHERE u.id = ${id};`;
 		return executeQuery(sql);
 	}
@@ -191,11 +191,11 @@ class Table {
 		let columns = Object.keys(row);
 		let values = Object.values(row);
 		let placeholderString = generatePlaceholders(values);
-		let sql = `INSERT INTO ${this.tableName} (${columns.join(',')}) 
+		let sql = `INSERT INTO users (${columns.join(',')}) 
         VALUES (${placeholderString});`;
 		return executeQuery(sql, values).then(results => {
 			let usersid = results.insertId;
-			let sql = `INSERT INTO mentees(userid)
+			let sql = `INSERT INTO ${this.tableName}(userid)
             VALUE(${usersid});`;
 			return executeQuery(sql, usersid);
 		});
