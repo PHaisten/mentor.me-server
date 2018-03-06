@@ -64,7 +64,7 @@ class Table {
 		let sql = `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
-        u.email as contactinfo,
+        u.email as contact,
         m.hourly as cost, 
         m.location as location, 
         m.qualifications as qualifications,
@@ -81,7 +81,7 @@ class Table {
         let sql = `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
-        u.email as contactinfo,
+        u.email as contact,
         m.location as location, 
         m.bio as bio 
         FROM ${this.tableName} t 
@@ -96,7 +96,7 @@ class Table {
         `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
-        u.email as email,
+        u.email as contact,
         m.hourly as cost, 
         m.location as location, 
         m.bio as bio,
@@ -112,7 +112,7 @@ class Table {
 		let sql = `SELECT 
           u.firstname as firstname, 
           u.lastname as lastname,
-          u.email as email,
+          u.email as contact,
           m.hourly as cost, 
           m.location as location, 
           m.bio as bio,
@@ -134,12 +134,25 @@ class Table {
         JOIN topics t on t.id = mt.topicid
         WHERE u.id = ${id};`;
 		return executeQuery(sql);
+    }
+    getAllMentees() {
+        let sql =
+        `SELECT 
+        u.firstname as firstname, 
+        u.lastname as lastname,
+        u.email as contact, 
+        m.location as location, 
+        m.bio as bio,
+        m._created as memberSince
+        FROM ${this.tableName} m
+        JOIN  users u on u.id = m.userid`;
+		return executeQuery(sql);
 	}
 	getMenteeProfile(id) {
 		let sql = `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
-        u.email as email,
+        u.email as contact,
         m.location as location, 
         m.bio as bio,
         m._created as memberSince

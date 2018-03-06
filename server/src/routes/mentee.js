@@ -4,6 +4,17 @@ import Table from "../table";
 let router = Router();
 let table = new Table("users");
 
+router.get('/', (req, res) => {
+	table
+		.getAllMentees()
+		.then(results => {
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
 router.get("/:id", (req, res) => {  //request: mentee userid
     table.getMenteeProfile(req.params.id)
       .then(results => {        //results: mentee profile info
