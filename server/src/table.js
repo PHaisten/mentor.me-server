@@ -76,9 +76,9 @@ class Table {
         JOIN users u on u.id = m.userid
         WHERE t.id = ${id}`;
 		return executeQuery(sql);
-    }
-    findMenteeByTopics(id) {
-        let sql = `SELECT 
+	}
+	findMenteeByTopics(id) {
+		let sql = `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
         u.email as contact,
@@ -89,11 +89,10 @@ class Table {
         JOIN mentees m on m.id = mt.menteeid 
         JOIN users u on u.id = m.userid
         WHERE t.id = ${id}`;
-        return executeQuery(sql);
-    }
-    getAllMentors() {
-        let sql =
-        `SELECT 
+		return executeQuery(sql);
+	}
+	getAllMentors() {
+		let sql = `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
         u.email as contact,
@@ -134,10 +133,9 @@ class Table {
         JOIN topics t on t.id = mt.topicid
         WHERE u.id = ${id};`;
 		return executeQuery(sql);
-    }
-    getAllMentees() {
-        let sql =
-        `SELECT 
+	}
+	getAllMentees() {
+		let sql = `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
         u.email as contact, 
@@ -195,21 +193,22 @@ class Table {
         VALUES (${placeholderString});`;
 		return executeQuery(sql, values).then(results => {
 			let usersid = results.insertId;
-			let sql = `INSERT INTO ${this.tableName}(userid)
-            VALUE(${usersid});`;
+			let sql = `INSERT INTO mentees(userid)
+		    VALUE(${usersid});`;
 			return executeQuery(sql, usersid);
 		});
 	}
+
 	createMentor(row) {
 		let columns = Object.keys(row);
 		let values = Object.values(row);
 		let placeholderString = generatePlaceholders(values);
-		let sql = `INSERT INTO ${this.tableName} (${columns.join(',')}) 
+		let sql = `INSERT INTO users (${columns.join(',')}) 
         VALUES (${placeholderString});`;
 		return executeQuery(sql, values).then(results => {
 			let usersid = results.insertId;
 			let sql = `INSERT INTO mentors(userid)
-            VALUE(${usersid});`;
+		    VALUE(${usersid});`;
 			return executeQuery(sql, usersid);
 		});
 	}
