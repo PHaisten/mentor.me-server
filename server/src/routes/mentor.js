@@ -90,4 +90,16 @@ router.post('/schedule/:id', (req, res) => {	//id = mentor.id
 			res.sendStatus(500);
 		});
 });
+router.get('/schedule/:id', (req, res) => {
+	table
+		.getScheduleByMentorId(req.params.id) 
+		.then(results => {
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
+
 export default router;

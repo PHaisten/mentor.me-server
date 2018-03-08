@@ -227,6 +227,20 @@ class Table {
 			return executeQuery(sql, usersid);
 		});
 	}
+	getScheduleByMentorId(id) {
+		let sql = `SELECT 
+		s.sunday,
+		s.monday,
+		s.tuesday,
+		s.wednesday,
+		s.thursday,
+		s.friday,
+		s.saturday
+		FROM ${this.tableName} m
+		JOIN schedule s on s.userid = m.id
+		WHERE m.id= ${id}`;
+		return executeQuery(sql);
+	}
 }
 
 export default Table;
