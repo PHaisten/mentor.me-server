@@ -65,4 +65,33 @@ router.post('/create', (req, res) => {
 			res.sendStatus(500);
 		});
 });
+router.put('/skill/:id', (req, res) => {
+	table
+		.addMenteeSkills(
+			req.params.id,
+			req.body.topickey
+		)
+		.then(results => {
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
+router.delete('/skill/:id', (req, res) => {
+	table
+		.removeMenteeSkills(
+			req.params.id,
+			req.body.topickey
+		)
+		.then(results => {
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
+
 export default router;

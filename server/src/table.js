@@ -253,6 +253,17 @@ class Table {
 		WHERE (mentorid = ${id} AND topicid = ${topickey});`
 		return executeQuery(sql);
 	}
+	addMenteeSkills(id, topickey) {
+		let sql = 
+		`INSERT INTO menteetopics(menteeid, topicid)
+		VALUES(${id}, ${topickey});`
+		return executeQuery(sql);
+	}
+	removeMenteeSkills(id, topickey) {
+	let sql = `DELETE FROM menteetopics
+	WHERE (menteeid = ${id} AND topicid = ${topickey});`
+	return executeQuery(sql);
+	}
 }
 
 export default Table;
