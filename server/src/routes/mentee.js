@@ -54,7 +54,7 @@ router.get('/skill/:id', (req, res) => {
 			res.sendStatus(500);
 		});
 });
-router.post('/create/', (req, res) => {
+router.post('/create', (req, res) => {
 	table
 		.createMentee(req.body) //(req.body.firstname/lastname/email/password)
 		.then(results => {

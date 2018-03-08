@@ -100,7 +100,7 @@ class Table {
         m.location as location, 
         m.bio as bio,
         m.qualifications as qualifications,
-        m.rate as rate,
+        m.hourlyrate as hourlyrate,
         m.schedule as schedule,
         m._created as memberSince
         FROM ${this.tableName} m
