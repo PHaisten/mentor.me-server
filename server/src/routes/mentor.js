@@ -70,7 +70,7 @@ router.post('/create/', (req, res) => {
 		});
 });
 
-router.post('/schedule/:id', (req, res) => {
+router.post('/schedule/:id', (req, res) => {	//id = mentor.id
 	table
 		.updateMentorSchedule(
 			req.params.id,

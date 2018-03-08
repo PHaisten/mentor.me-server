@@ -127,8 +127,8 @@ class Table {
 	getMentorSkills(id) {
 		let sql = `SELECT 
         t.name as skills
-        FROM ${this.tableName} u
-        JOIN  mentors m on u.id = m.userid
+        FROM ${this.tableName} m
+        JOIN  users u on u.id = m.userid
         JOIN mentortopics mt on mt.mentorid = m.id
         JOIN topics t on t.id = mt.topicid
         WHERE u.id = ${id};`;
@@ -162,8 +162,8 @@ class Table {
 	getMenteeTopics(id) {
 		let sql = `SELECT 
         t.name as topics
-        FROM ${this.tableName} u
-        JOIN  mentees m on u.id = m.userid
+        FROM ${this.tableName} m
+        JOIN  users u on u.id = m.userid
         JOIN menteetopics mt on mt.menteeid = m.id
         JOIN topics t on t.id = mt.topicid
         WHERE u.id = ${id};`;
@@ -172,7 +172,7 @@ class Table {
 	updateMenteeProfile(id, bio, location) {
 		let sql = `UPDATE mentees
         SET bio= ${`"${bio}"`}, location = ${`"${location}"`}
-        WHERE userid = ${id};`;
+        WHERE id = ${id};`;
 		return executeQuery(sql);
 	}
 	updateMentorProfile(id, hourlyrate, qualifications, location, bio) {
