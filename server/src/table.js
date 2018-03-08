@@ -200,8 +200,6 @@ class Table {
         ${`"${wednesday}"`}, ${`"${thursday}"`}, ${`"${friday}"`}, ${`"${saturday}"`})`;
 		return executeQuery(sql);
 	}
-
-	// WHERE mentor.id = ${id};
 	createMentee(row) {
 		let columns = Object.keys(row);
 		let values = Object.values(row);
