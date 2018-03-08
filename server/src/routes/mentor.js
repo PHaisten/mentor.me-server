@@ -28,19 +28,6 @@ router.get('/:id', (req, res) => {
 			res.sendStatus(500);
 		});
 });
-router.get('/skill/:id', (req, res) => {
-	//request: mentor userid
-	table
-		.getMentorSkills(req.params.id)
-		.then(results => {
-			//results: mentor skills
-			res.json(results);
-		})
-		.catch(err => {
-			console.log(err);
-			res.sendStatus(500);
-		});
-});
 router.put('/:id', (req, res) => {
 	table
 		.updateMentorProfile(
@@ -93,6 +80,47 @@ router.post('/schedule/:id', (req, res) => {	//id = mentor.id
 router.get('/schedule/:id', (req, res) => {
 	table
 		.getScheduleByMentorId(req.params.id) 
+		.then(results => {
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
+router.get('/skill/:id', (req, res) => {
+	//request: mentor userid
+	table
+		.getMentorSkills(req.params.id)
+		.then(results => {
+			//results: mentor skills
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
+router.put('/skill/:id', (req, res) => {
+	table
+		.addMentorSkills(
+			req.params.id,
+			req.body.topickey
+		)
+		.then(results => {
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
+router.delete('/skill/:id', (req, res) => {
+	table
+		.removeMentorSkills(
+			req.params.id,
+			req.body.topickey
+		)
 		.then(results => {
 			res.json(results);
 		})

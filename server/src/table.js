@@ -241,6 +241,18 @@ class Table {
 		WHERE m.id= ${id}`;
 		return executeQuery(sql);
 	}
+	addMentorSkills(id, topickey) {
+		let sql = 
+		`INSERT INTO mentortopics(mentorid, topicid)
+		VALUES(${id}, ${topickey});`
+		return executeQuery(sql);
+	}
+	removeMentorSkills(id, topickey) {
+		let sql = 
+		`DELETE FROM mentortopics
+		WHERE (mentorid = ${id} AND topicid = ${topickey});`
+		return executeQuery(sql);
+	}
 }
 
 export default Table;
