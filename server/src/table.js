@@ -175,16 +175,33 @@ class Table {
         WHERE userid = ${id};`;
 		return executeQuery(sql);
 	}
-	updateMentorProfile(id, bio, location, hourly, rate, qualifications) {
+	updateMentorProfile(id, hourlyrate, qualifications, location, bio) {
 		let sql = `UPDATE mentors
-        SET bio= ${`"${bio}"`}, 
-        location = ${`"${location}"`}, 
-        hourly= ${hourly}, 
-        rate= ${rate}, 
-        qualifications= ${`"${qualifications}"`}
-        WHERE userid = ${id};`;
+        SET hourlyrate= ${hourlyrate},
+        qualifications= ${`"${qualifications}"`},
+        location= ${`"${location}"`},
+        bio= ${`"${bio}"`}
+        WHERE id = ${id};`;
 		return executeQuery(sql);
 	}
+
+	updateMentorSchedule(
+		id,
+		sunday,
+		monday,
+		tuesday,
+		wednesday,
+		thursday,
+		friday,
+		saturday
+	) {
+		let sql = `INSERT INTO schedule (userid, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday) 
+        VALUES (${id}, ${`"${sunday}"`}, ${`"${monday}"`}, ${`"${tuesday}"`}, 
+        ${`"${wednesday}"`}, ${`"${thursday}"`}, ${`"${friday}"`}, ${`"${saturday}"`})`;
+		return executeQuery(sql);
+	}
+
+	// WHERE mentor.id = ${id};
 	createMentee(row) {
 		let columns = Object.keys(row);
 		let values = Object.values(row);

@@ -43,8 +43,13 @@ router.get('/skill/:id', (req, res) => {
 });
 router.put('/:id', (req, res) => {
 	table
-    .updateMentorProfile(req.params.id, req.body.bio, req.body.location, 
-      req.body.hourly, req.body.rate, req.body.qualifications)
+		.updateMentorProfile(
+			req.params.id,
+			req.body.hourlyrate,
+			req.body.qualifications,
+			req.body.location,
+			req.body.bio
+		)
 		.then(results => {
 			res.json(results);
 		})
@@ -56,6 +61,27 @@ router.put('/:id', (req, res) => {
 router.post('/create/', (req, res) => {
 	table
 		.createMentor(req.body) //(req.body.firstname/lastname/email/password)
+		.then(results => {
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
+
+router.post('/schedule/:id', (req, res) => {
+	table
+		.updateMentorSchedule(
+			req.params.id,
+			req.body.sunday,
+			req.body.monday,
+			req.body.tuesday,
+			req.body.wednesday,
+			req.body.thursday,
+			req.body.friday,
+			req.body.saturday
+		)
 		.then(results => {
 			res.json(results);
 		})
