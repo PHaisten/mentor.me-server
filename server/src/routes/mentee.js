@@ -65,12 +65,9 @@ router.post('/create', (req, res) => {
 			res.sendStatus(500);
 		});
 });
-router.put('/skill/:id', (req, res) => {
+router.post('/skill/:id', (req, res) => {
 	table
-		.addMenteeSkills(
-			req.params.id,
-			req.body.topickey
-		)
+		.addMenteeSkills(req.params.id, req.body.topicid)
 		.then(results => {
 			res.json(results);
 		})
@@ -81,10 +78,7 @@ router.put('/skill/:id', (req, res) => {
 });
 router.delete('/skill/:id', (req, res) => {
 	table
-		.removeMenteeSkills(
-			req.params.id,
-			req.body.topickey
-		)
+		.removeMenteeSkills(req.params.id, req.body.topickey)
 		.then(results => {
 			res.json(results);
 		})

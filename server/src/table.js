@@ -242,27 +242,24 @@ class Table {
 		return executeQuery(sql);
 	}
 	addMentorSkills(id, topickey) {
-		let sql = 
-		`INSERT INTO mentortopics(mentorid, topicid)
-		VALUES(${id}, ${topickey});`
+		let sql = `INSERT INTO mentortopics(mentorid, topicid)
+		VALUES(${id}, ${topickey});`;
 		return executeQuery(sql);
 	}
 	removeMentorSkills(id, topickey) {
-		let sql = 
-		`DELETE FROM mentortopics
-		WHERE (mentorid = ${id} AND topicid = ${topickey});`
+		let sql = `DELETE FROM mentortopics
+		WHERE (mentorid = ${id} AND topicid = ${topickey});`;
 		return executeQuery(sql);
 	}
 	addMenteeSkills(id, topickey) {
-		let sql = 
-		`INSERT INTO menteetopics(menteeid, topicid)
-		VALUES(${id}, ${topickey});`
+		let sql = `INSERT INTO menteetopics (menteeid, topicid)
+		VALUES(${id}, ${topickey});`;
 		return executeQuery(sql);
 	}
 	removeMenteeSkills(id, topickey) {
-	let sql = `DELETE FROM menteetopics
-	WHERE (menteeid = ${id} AND topicid = ${topickey});`
-	return executeQuery(sql);
+		let sql = `DELETE FROM menteetopics
+	WHERE (menteeid = ${id} AND topicid = ${topickey});`;
+		return executeQuery(sql);
 	}
 }
 
