@@ -67,7 +67,7 @@ router.post('/create', (req, res) => {
 });
 router.post('/skill/:id', (req, res) => {
 	table
-		.addMenteeSkills(req.params.id, req.body.topicid)
+		.addMenteeSkills(req.params.id, req.body)
 		.then(results => {
 			res.json(results);
 		})
@@ -78,7 +78,7 @@ router.post('/skill/:id', (req, res) => {
 });
 router.delete('/skill/:id', (req, res) => {
 	table
-		.removeMenteeSkills(req.params.id, req.body.topickey)
+		.removeMenteeSkills(req.params.id, req.body)
 		.then(results => {
 			res.json(results);
 		})
