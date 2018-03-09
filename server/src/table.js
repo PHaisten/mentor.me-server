@@ -253,10 +253,14 @@ class Table {
 		WHERE (mentorid = ${id} AND topicid = ${topickey});`
 		return executeQuery(sql);
 	}
-	addMenteeSkills(id, topickey) {
-		let sql = 
-		`INSERT INTO menteetopics(menteeid, topicid)
-		VALUES(${id}, ${topickey});`
+	addMenteeSkills(id, body) {
+		let input = body.map( item => {
+			let values = Object.values(item)
+			return `(${id}, ${values})`;
+		});
+		let sql =  
+			`INSERT INTO menteetopics(menteeid, topicid)		
+			VALUES${input.join(',')};`
 		return executeQuery(sql);
 	}
 	removeMenteeSkills(id, topickey) {

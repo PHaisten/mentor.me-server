@@ -69,7 +69,7 @@ router.put('/skill/:id', (req, res) => {
 	table
 		.addMenteeSkills(
 			req.params.id,
-			req.body.topickey
+			req.body
 		)
 		.then(results => {
 			res.json(results);
