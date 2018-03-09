@@ -105,7 +105,7 @@ router.put('/skill/:id', (req, res) => {
 	table
 		.addMentorSkills(
 			req.params.id,
-			req.body.topickey
+			req.body
 		)
 		.then(results => {
 			res.json(results);
@@ -119,7 +119,7 @@ router.delete('/skill/:id', (req, res) => {
 	table
 		.removeMentorSkills(
 			req.params.id,
-			req.body.topickey
+			req.body
 		)
 		.then(results => {
 			res.json(results);
