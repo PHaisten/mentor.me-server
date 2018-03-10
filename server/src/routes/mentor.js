@@ -57,7 +57,8 @@ router.post('/create/', (req, res) => {
 		});
 });
 
-router.post('/schedule/:id', (req, res) => {	//id = mentor.id
+router.post('/schedule/:id', (req, res) => {
+	//id = mentor.id
 	table
 		.updateMentorSchedule(
 			req.params.id,
@@ -79,7 +80,7 @@ router.post('/schedule/:id', (req, res) => {	//id = mentor.id
 });
 router.get('/schedule/:id', (req, res) => {
 	table
-		.getScheduleByMentorId(req.params.id) 
+		.getScheduleByMentorId(req.params.id)
 		.then(results => {
 			res.json(results);
 		})
@@ -101,12 +102,9 @@ router.get('/skill/:id', (req, res) => {
 			res.sendStatus(500);
 		});
 });
-router.put('/skill/:id', (req, res) => {
+router.post('/skill/:id', (req, res) => {
 	table
-		.addMentorSkills(
-			req.params.id,
-			req.body
-		)
+		.addMentorSkills(req.params.id, req.body.topicid)
 		.then(results => {
 			res.json(results);
 		})
@@ -117,10 +115,7 @@ router.put('/skill/:id', (req, res) => {
 });
 router.delete('/skill/:id', (req, res) => {
 	table
-		.removeMentorSkills(
-			req.params.id,
-			req.body
-		)
+		.removeMentorSkills(req.params.id, req.body)
 		.then(results => {
 			res.json(results);
 		})

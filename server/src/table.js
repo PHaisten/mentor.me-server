@@ -266,49 +266,60 @@ class Table {
 	// 	{
 	// 		"topicid": "11"
 	// 	},
-	// 	{ 
-	// 		"topicid": "21" 
+	// 	{
+	// 		"topicid": "21"
 	// 	},
 	// 	{
 	// 		"topicid": "31"
 	// 	}
 	// ]
-	addMentorSkills(id, body) {
-		let input = body.map(item => {
-		  let values = Object.values(item);
-		  return `(${id}, ${values})`;
-		});
-		let sql = `INSERT INTO mentortopics(mentorid, topicid)		
-				VALUES${input.join(",")};`;
+	// addMentorSkills(id, body) {
+	// 	let input = body.map(item => {
+	// 	  let values = Object.values(item);
+	// 	  return `(${id}, ${values})`;
+	// 	});
+	// 	let sql = `INSERT INTO mentortopics(mentorid, topicid)
+	// 			VALUES${input.join(",")};`;
+	// 	return executeQuery(sql);
+	//   }
+
+	addMentorSkills(id, topickey) {
+		let sql = `INSERT INTO mentortopics(mentorid, topicid)
+		VALUES(${id}, ${topickey});`;
 		return executeQuery(sql);
-	  }
-	  removeMentorSkills(id, body) {
+	}
+	removeMentorSkills(id, body) {
 		let input = body.map(item => {
-		  let values = Object.values(item);
-		  return values;
+			let values = Object.values(item);
+			return values;
 		});
 		let sql = `DELETE FROM mentortopics
-				WHERE mentorid = ${id} AND topicid IN (${input.join(",")});`;
+				WHERE mentorid = ${id} AND topicid IN (${input.join(',')});`;
 		return executeQuery(sql);
-	  }
-	  addMenteeSkills(id, body) {
-		let input = body.map(item => {
-		  let values = Object.values(item);
-		  return `(${id}, ${values})`;
-		});
-		let sql = `INSERT INTO menteetopics(menteeid, topicid)		
-				VALUES${input.join(",")};`;
+	}
+	// addMenteeSkills(id, body) {
+	// 	let input = body.map(item => {
+	// 		let values = Object.values(item);
+	// 		return `(${id}, ${values})`;
+	// 	});
+	// 	let sql = `INSERT INTO menteetopics(menteeid, topicid)
+	// 			VALUES${input.join(',')};`;
+	// 	return executeQuery(sql);
+	// }
+	addMenteeSkills(id, topickey) {
+		let sql = `INSERT INTO menteetopics (menteeid, topicid)
+        	VALUES(${id}, ${topickey});`;
 		return executeQuery(sql);
-	  }
-	  removeMenteeSkills(id, body) {
+	}
+	removeMenteeSkills(id, body) {
 		let input = body.map(item => {
-		  let values = Object.values(item);
-		  return values;
+			let values = Object.values(item);
+			return values;
 		});
 		let sql = `DELETE FROM menteetopics
-				WHERE menteeid = ${id} AND topicid IN (${input.join(",")});`;
+				WHERE menteeid = ${id} AND topicid IN (${input.join(',')});`;
 		return executeQuery(sql);
-	  }
+	}
 }
 
 export default Table;

@@ -67,7 +67,7 @@ router.post('/create', (req, res) => {
 });
 router.post('/skill/:id', (req, res) => {
 	table
-		.addMenteeSkills(req.params.id, req.body)
+		.addMenteeSkills(req.params.id, req.body.topicid)
 		.then(results => {
 			res.json(results);
 		})
