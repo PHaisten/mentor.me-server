@@ -101,8 +101,10 @@ class Table {
         m.bio as bio,
         m.qualifications as qualifications,
         m.hourlyrate as hourlyrate,
-        m.schedule as schedule,
-        m._created as memberSince
+		m.schedule as schedule,
+		DATE_FORMAT(m._created, '%M %D %Y') memberSince,
+		m.id as id,
+		m.userid userid
         FROM ${this.tableName} m
         JOIN  users u on u.id = m.userid`;
 		return executeQuery(sql);
@@ -118,10 +120,11 @@ class Table {
           m.qualifications as qualifications,
           m.rate as rate,
           m.schedule as schedule,
-          m._created as memberSince
+		  m._created as memberSince,
+		  m.id as id
           FROM ${this.tableName} m
           JOIN  users u on u.id = m.userid
-          WHERE m.userid = ${id};`;
+          WHERE u.id = ${id};`;
 		return executeQuery(sql);
 	}
 	getMentorSkills(id) {
