@@ -68,7 +68,6 @@ class Table {
         m.hourly as cost, 
         m.location as location, 
         m.qualifications as qualifications,
-        m.rate as rate,
         m.bio as bio 
         FROM ${this.tableName} t 
         JOIN mentortopics mt on mt.topicid = t.id
@@ -164,12 +163,13 @@ class Table {
 	}
 	getMenteeTopics(id) {
 		let sql = `SELECT 
-        t.name as topics
+		t.name as topics,
+		t.id as id
         FROM ${this.tableName} m
         JOIN  users u on u.id = m.userid
         JOIN menteetopics mt on mt.menteeid = m.id
         JOIN topics t on t.id = mt.topicid
-        WHERE u.id = ${id};`;
+        WHERE m.id = ${id};`;
 		return executeQuery(sql);
 	}
 	updateMenteeProfile(id, bio, location) {
@@ -322,6 +322,13 @@ class Table {
 		let sql = `DELETE FROM menteetopics
 				WHERE menteeid = ${id} AND topicid IN (${input.join(',')});`;
 		return executeQuery(sql);
+	}
+	getAllTopics() {
+		`SELECT 
+		t.id as id,
+		t.name as name
+		FROM ${this.tableName} t`;
+		return executeQuery(sql)
 	}
 }
 
