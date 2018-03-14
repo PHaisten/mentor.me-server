@@ -325,7 +325,7 @@ class Table {
 		return executeQuery(sql);
 	}
 	getAllTopics() {
-		`SELECT 
+		let sql = `SELECT 
 		t.id as id,
 		t.name as name
 		FROM ${this.tableName} t`;
