@@ -65,11 +65,11 @@ class Table {
         u.firstname as firstname, 
         u.lastname as lastname,
         u.email as contact,
-        m.hourly as cost, 
+        m.hourlyrate as hourlyrate, 
         m.location as location, 
         m.qualifications as qualifications,
-        m.rate as rate,
-        m.bio as bio 
+		m.bio as bio,
+		DATE_FORMAT(m._created, '%M %D %Y') memberSince
         FROM ${this.tableName} t 
         JOIN mentortopics mt on mt.topicid = t.id
         JOIN mentors m on m.id = mt.mentorid 
@@ -169,7 +169,7 @@ class Table {
         JOIN  users u on u.id = m.userid
         JOIN menteetopics mt on mt.menteeid = m.id
         JOIN topics t on t.id = mt.topicid
-        WHERE u.id = ${id};`;
+        WHERE m.id = ${id};`;
 		return executeQuery(sql);
 	}
 	updateMenteeProfile(id, bio, location) {
