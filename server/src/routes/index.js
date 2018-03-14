@@ -12,7 +12,7 @@ let router = Router();
 router.use('/auth', authRouter);
 router.use('/donate', stripeDonationsRouter);
 
-// router.use(tokenMiddleware, isLoggedIn);
+router.use(tokenMiddleware, isLoggedIn);
 
 router.use('/topics', topicRouter);
 router.use('/mentees', menteeRouter);

@@ -164,7 +164,8 @@ class Table {
 	}
 	getMenteeTopics(id) {
 		let sql = `SELECT 
-        t.name as topics
+		t.name as topics,
+		t.id as id
         FROM ${this.tableName} m
         JOIN  users u on u.id = m.userid
         JOIN menteetopics mt on mt.menteeid = m.id
@@ -321,6 +322,13 @@ class Table {
 		});
 		let sql = `DELETE FROM menteetopics
 				WHERE menteeid = ${id} AND topicid IN (${input.join(',')});`;
+		return executeQuery(sql);
+	}
+	getAllTopics() {
+		`SELECT 
+		t.id as id,
+		t.name as name
+		FROM ${this.tableName} t`;
 		return executeQuery(sql);
 	}
 }

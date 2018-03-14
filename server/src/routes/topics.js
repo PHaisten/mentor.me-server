@@ -7,7 +7,7 @@ let topicsTable = new Table('topics');
 //Testing to get all topics to populate for autocomplete
 router.get('', (req, res) => {
 	topicsTable
-		.getAll(req.params.id, req.params.name)
+		.getAllTopics()
 		.then(results => {
 			res.json(results);
 		})
