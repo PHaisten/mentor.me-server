@@ -87,5 +87,16 @@ router.delete('/skill/:id', (req, res) => {
 			res.sendStatus(500);
 		});
 });
+router.get('/matches/:id', (req, res) => {
+	table
+		.getAllMenteeMatches(req.params.id)
+		.then(results => {
+			res.json(results);
+		})
+		.catch(err => {
+			console.log(err);
+			res.sendStatus(500);
+		});
+});
 
 export default router;

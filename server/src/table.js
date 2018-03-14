@@ -331,6 +331,44 @@ class Table {
 		FROM ${this.tableName} t`;
 		return executeQuery(sql);
 	}
+	getAllMenteeMatches(id) {
+		let sql = ` SELECT 
+			t.id as id
+			FROM mentees m
+			JOIN menteetopics mt on mt.menteeid = m.id
+			JOIN topics t on t.id = mt.topicid
+			WHERE m.id = ${id};`;
+		return executeQuery(sql)
+		.then(results => {
+			return results.map(obj => {
+				return Object.values(obj)
+			}).reduce((a,b) => { 
+				return a.concat(...b)
+			})
+		})
+		.then(results => {
+			let menteetopics = results;
+			let sql = `SELECT
+				t.name as name,
+				t.id as topicid,
+				m.id as mentorid,
+				u.firstname as firstname, 
+				u.lastname as lastname,
+				u.email as contact,
+				m.hourly as cost, 
+				m.location as location, 
+				m.bio as bio,
+				m.qualifications as qualifications,
+				m.schedule as schedule,
+				m._created as memberSince
+				FROM mentors m
+				JOIN  users u on u.id = m.userid
+				JOIN mentortopics mt on mt.mentorid = m.id
+				JOIN topics t on t.id = mt.topicid
+				WHERE t.id IN (${menteetopics.join(',')});`;			
+			return executeQuery(sql)
+		})
+	}
 }
 
 export default Table;
