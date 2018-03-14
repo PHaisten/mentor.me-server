@@ -64,11 +64,12 @@ class Table {
 		let sql = `SELECT 
         u.firstname as firstname, 
         u.lastname as lastname,
-        u.email as contact,
+        u.email as email,
         m.hourlyrate as hourlyrate, 
         m.location as location, 
         m.qualifications as qualifications,
 		m.bio as bio,
+		m.id as id,
 		DATE_FORMAT(m._created, '%M %D %Y') memberSince
         FROM ${this.tableName} t 
         JOIN mentortopics mt on mt.topicid = t.id
@@ -339,35 +340,37 @@ class Table {
 			JOIN topics t on t.id = mt.topicid
 			WHERE m.id = ${id};`;
 		return executeQuery(sql)
-		.then(results => {
-			return results.map(obj => {
-				return Object.values(obj)
-			}).reduce((a,b) => { 
-				return a.concat(...b)
+			.then(results => {
+				return results
+					.map(obj => {
+						return Object.values(obj);
+					})
+					.reduce((a, b) => {
+						return a.concat(...b);
+					});
 			})
-		})
-		.then(results => {
-			let menteetopics = results;
-			let sql = `SELECT
+			.then(results => {
+				let menteetopics = results;
+				let sql = `SELECT
 				t.name as name,
 				t.id as topicid,
 				m.id as mentorid,
 				u.firstname as firstname, 
 				u.lastname as lastname,
 				u.email as contact,
-				m.hourly as cost, 
+				m.hourlyrate as hourlyrate, 
 				m.location as location, 
 				m.bio as bio,
 				m.qualifications as qualifications,
 				m.schedule as schedule,
-				m._created as memberSince
+				DATE_FORMAT(m._created, '%M %D %Y') memberSince
 				FROM mentors m
 				JOIN  users u on u.id = m.userid
 				JOIN mentortopics mt on mt.mentorid = m.id
 				JOIN topics t on t.id = mt.topicid
-				WHERE t.id IN (${menteetopics.join(',')});`;			
-			return executeQuery(sql)
-		})
+				WHERE t.id IN (${menteetopics.join(',')});`;
+				return executeQuery(sql);
+			});
 	}
 }
 
