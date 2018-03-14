@@ -156,7 +156,7 @@ class Table {
         u.email as contact,
         m.location as location, 
         m.bio as bio,
-        m._created as memberSince
+        DATE_FORMAT(m._created, '%M %D %Y') memberSince
         FROM ${this.tableName} m
         JOIN users u on u.id = m.userid
         WHERE u.id = ${id};`;
