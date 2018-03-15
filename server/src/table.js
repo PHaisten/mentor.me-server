@@ -354,7 +354,7 @@ class Table {
 				let sql = `SELECT
 				t.name as name,
 				t.id as topicid,
-				m.id as mentorid,
+				m.id as id,
 				u.firstname as firstname, 
 				u.lastname as lastname,
 				u.email as contact,
